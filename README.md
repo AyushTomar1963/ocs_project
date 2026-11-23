@@ -55,3 +55,17 @@ The frontend is intentionally minimal and stateless, acting only as a client tha
 
 The system follows a strict backend-enforced state machine:
 
+
+---
+
+## Configuration
+
+Copy `.env.example` to `.env` and fill in the values. `JWT_SECRET` is required (32+ characters): the server
+refuses to start without it, so no default secret lives in the source. Generate one with:
+
+```
+node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
+```
+
+If an earlier version was deployed, set a **new** `JWT_SECRET` there. The old built-in value is public in the git
+history and must be treated as compromised. Changing the secret signs every user out.
